@@ -1,23 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Route, Switch } from "react-router-dom";
+import "./App.css";
+import { NotFound } from "./components/NotFound";
+import { Pokemon } from "./components/Pokemon";
+import { Welcome } from "./components/Welcome";
+import { loadPokemon } from "./reducers/pokemon";
 
 function App() {
+  const [name, setName] = useState("");
+  const dispatch = useDispatch();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="container">
+      <div className="pokedex">
+        <Switch>
+          <Route path="/not-found" exact component={NotFound} />
+          <Route path="/pokemon/:pokemonName" exact component={Pokemon} />
+          <Route component={Welcome} />
+        </Switch>
+        <form
+          action=""
+          onSubmit={(e) => {
+            e.preventDefault();
+            dispatch(loadPokemon(name));
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          <div className="ui action input app__inputDiv">
+            <input
+              type="text"
+              placeholder="Enter here..."
+              onChange={(e) => setName(e.currentTarget.value)}
+              value={name}
+            />
+            <button className="ui button" type="submit">
+              Search
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

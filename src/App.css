@@ -36,3 +36,29 @@
     transform: rotate(360deg);
   }
 }
+
+.pokedex {
+  background-color: salmon;
+  width: 500px;
+  height: 300px;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 5px 5px 10px white;
+  color: yellow;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.app__inputDiv {
+  margin-top: 50px;
+}
+
+.app__inputDiv > input {
+  width: 250px !important;
+}
